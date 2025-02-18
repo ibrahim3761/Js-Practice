@@ -11,24 +11,50 @@
 // // console.log(calculateVAT("foo"));
 
 
-/*function signature/sample */
-function  validContact( contact ) {
-    if ( typeof contact!== "string") {
-        return "Invalid";
-    }
 
-    if (isNaN(contact) || contact.includes(" ")) {
-        return false;
-    }
+// function  validContact( contact ) {
+//     if ( typeof contact!== "string") {
+//         return "Invalid";
+//     }
 
-    if (contact.length !== 11) {
-        return false;
-    }
-    if (contact[0] !== "0" || contact[1] !== "1") {
-        return false;
-    }
+//     if (isNaN(contact) || contact.includes(" ")) {
+//         return false;
+//     }
 
-    return true;
-}
+//     if (contact.length !== 11) {
+//         return false;
+//     }
+//     if (contact[0] !== "0" || contact[1] !== "1") {
+//         return false;
+//     }
 
-console.log(validContact(true));
+//     return true;
+// }
+// // console.log(validContact(true));
+
+
+
+// function  willSuccess( marks ) {
+//     if (Array.isArray(marks) === false) {
+//         return "Invalid";
+//     }
+
+//     let pass=0;
+//     let fail=0;
+
+//     for(let i=0; i<marks.length; i++){
+//         if (marks[i] >= 50) {
+//             pass++;
+//         } else {
+//             fail++;
+//         }
+//     }
+
+//     if (pass > fail) {
+//         return true;
+//     }
+//      else {
+//         return false;
+//     }
+// }
+// // console.log(willSuccess(90));

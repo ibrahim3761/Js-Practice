@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      .comment {
+        border: 2px solid blue;
+        background-color: lightcyan;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Awesome Comment Box. Write what you want</h1>
+    <section>
+      <h3>ALl comment here</h3>
+      <div id="comment-container">
+        <p class="comment">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, quam.
+        </p>
+        <p class="comment">
+          Libero maxime vitae, illum quasi sequi numquam aliquam nemo totam?
+        </p>
+        <p class="comment">
+          Mollitia cumque maxime veritatis tempore, voluptas quisquam pariatur
+          quia dolores.
+        </p>
+      </div>
+
+      <textarea name="" id="comment-text-box" cols="60" rows="5"></textarea>
+      <br />
+
+      <button id="btn-comment">Comment</button>
+    </section>
+
+    <script>
+      document
+        .getElementById("btn-comment")
+        .addEventListener("click", function () {
+          let comment = document.getElementById("comment-text-box").value;
+          let commentContainer = document.getElementById("comment-container");
+
+          //create a new p element
+          let newComment = document.createElement("p");
+          newComment.classList.add("comment");
+          newComment.innerText = comment;
+
+          //append the new p element to the comment container
+          commentContainer.appendChild(newComment);
+
+          //clear the text box
+          document.getElementById("comment-text-box").value = " ";
+        });
+    </script>
+
+    <script src="js/commentbox.js"></script>
+  </body>
+</html>

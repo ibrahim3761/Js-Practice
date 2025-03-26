@@ -1,13 +1,38 @@
 import Counter from './Counter';
 import Batsman from './Batsman';
 import './App.css'
+import Users from './Users';
 import ToDo from './Todo'
+import Friends from './Friends';
+import { Suspense } from 'react';
+
+const fetchUsers = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json()) 
+
+const fetchFriends = async() => {
+  const response = await fetch('https://jsonplaceholder.typicode.com/users');
+  return response.json();
+}
+
+
 function App() {
+
+  const friendsPromise = fetchFriends();
+
   const time = 50;
   return (
    
     <>
       <h1>React Core Concepts</h1>
+{/* 
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Users fetchUsers={fetchUsers}></Users>
+      </Suspense> */}
+
+      <Suspense fallback={<h1>Loading...</h1>}>
+        <Friends friendsPromise={friendsPromise}></Friends>
+      </Suspense>
+      
       <Batsman></Batsman>
       
       {/* <Counter></Counter> */}

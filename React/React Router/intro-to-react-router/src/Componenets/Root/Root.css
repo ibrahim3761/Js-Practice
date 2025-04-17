@@ -1,0 +1,14 @@
+.root-main{
+    display: flex;
+    gap: 20px;
+}
+
+nav a.active{
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    text-decoration-color: red;
+    text-decoration-skip-ink: auto;
+}

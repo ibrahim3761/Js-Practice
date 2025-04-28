@@ -1,45 +1,72 @@
-import React from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { auth } from "../../firebase.init";
+import { FaEye } from "react-icons/fa";
+import { IoMdEyeOff } from "react-icons/io";
+import { Link } from "react-router";
 
 const Register = () => {
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-    const handleResister = (e) => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        console.log(email, password);
+  const handleResister = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const terms = e.target.terms.checked;
+    console.log(email, password);
+    setSuccess(false);
+    setError("");
+    if (!terms) {
+      setError("Please accept terms and conditions");
+      return;
     }
 
+    // firebase auth create user with email and password
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        console.log(result);
+        setSuccess(true);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setError(error.message);
+      });
+  };
+
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleResister}>
+    <div className="max-w-sm mx-auto mt-20 p-5 border border-gray-300 rounded-lg shadow-md bg-white">
+      <h2 className="font-bold text-2xl mb-4">Register</h2>
+      <form className="space-y-4" onSubmit={handleResister}>
         {/* Email Feild */}
-        <div className="join">
-          <div>
-            <label className="input validator join-item">
-              <svg
-                className="h-[1em] opacity-50"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <g
-                  strokeLinejoin="round"
-                  strokeLinecap="round"
-                  strokeWidth="2.5"
-                  fill="none"
-                  stroke="currentColor"
-                >
-                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                </g>
-              </svg>
-              <input type="email" name="email" placeholder="mail@site.com" required />
-            </label>
-            <div className="validator-hint hidden">
-              Enter valid email address
-            </div>
-          </div>
-        </div>
+
+        <label className="input validator join-item">
+          <svg
+            className="h-[1em] opacity-50"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
+            <g
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </g>
+          </svg>
+          <input
+            type="email"
+            name="email"
+            placeholder="mail@site.com"
+            required
+          />
+        </label>
+        <div className="validator-hint hidden">Enter valid email address</div>
+
         <br />
         {/* Password Feild */}
         <label className="input validator">
@@ -60,14 +87,22 @@ const Register = () => {
             </g>
           </svg>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             required
             placeholder="Password"
-            minlength="8"
+            minLength="8"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
           />
+          <button
+            onClick={() => {
+              setShowPassword(!showPassword);
+            }}
+            className="btn btn-xs"
+          >
+            {showPassword ? <FaEye /> : <IoMdEyeOff />}
+          </button>
         </label>
         <p className="validator-hint hidden">
           Must be more than 8 characters, including
@@ -77,9 +112,21 @@ const Register = () => {
           At least one uppercase letter
         </p>
         <br />
+        <label className="label">
+          <input type="checkbox" name="terms"  className="checkbox" />
+          Accept Terms and Conditions
+        </label>
+        <br />
         {/* Submit */}
         <input className="btn btn-primary" type="submit" value="Submit" />
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+        {success && (
+          <p className="text-green-500 text-sm mt-2">
+            User Created Successfully
+          </p>
+        )}
       </form>
+      <p>Alreay have an account? Please <Link className="text-blue-600" to="/login">Log in</Link></p>
     </div>
   );
 };

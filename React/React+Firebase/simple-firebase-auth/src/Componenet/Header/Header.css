@@ -1,0 +1,12 @@
+nav a{
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2rem;
+    margin: 0 15px;
+}
+
+nav a.active{
+    color: #007BFF;
+    font-weight: bold;
+    text-decoration: underline;
+}

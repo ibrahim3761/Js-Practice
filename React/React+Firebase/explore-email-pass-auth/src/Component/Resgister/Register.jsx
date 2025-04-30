@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../../firebase.init";
 import { FaEye } from "react-icons/fa";
@@ -12,6 +12,8 @@ const Register = () => {
 
   const handleResister = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
+    const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const terms = e.target.terms.checked;
@@ -27,7 +29,27 @@ const Register = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result);
-        setSuccess(true);
+        // email verification
+        sendEmailVerification(auth.currentUser)
+          .then(() => {
+            // Email verification sent! Now you can display a message to the user
+            console.log("Email verification sent!");
+            setSuccess(true);
+          })
+          .catch((error) => {
+            console.error("Error sending email verification:", error);
+          });
+        // update user profile with name and photo
+        updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
+        })
+          .then(() => {
+            console.log("User profile updated successfully!");
+          })
+          .catch((error) => {
+            console.error("Error updating user profile:", error);
+          });
       })
       .catch((error) => {
         console.log(error.message);
@@ -40,6 +62,26 @@ const Register = () => {
       <h2 className="font-bold text-2xl mb-4">Register</h2>
       <form className="space-y-4" onSubmit={handleResister}>
         {/* Email Feild */}
+
+        <label className="input validator join-item">
+          
+          <input
+            type="text"
+            name="name"
+            placeholder="Your name"
+            required
+          />
+        </label>
+
+        <label className="input validator join-item">
+         
+          <input
+            type="text"
+            name="photo"
+            placeholder="Your photo URL"
+            required
+          />
+        </label>
 
         <label className="input validator join-item">
           <svg

@@ -7,12 +7,12 @@ import { getAuth } from "firebase/auth";
 // Danger zone
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCBVOfqEgUDEkxHft9n1Y4YiyWlOepFMbc",
-  authDomain: "auth-integration-bbf0d.firebaseapp.com",
-  projectId: "auth-integration-bbf0d",
-  storageBucket: "auth-integration-bbf0d.firebasestorage.app",
-  messagingSenderId: "618461945925",
-  appId: "1:618461945925:web:a22afc33af20efa7c2832c"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase

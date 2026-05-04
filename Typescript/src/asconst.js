@@ -5,7 +5,7 @@
 //     Viewer = "Viewer",
 // }
 const UserRoles = {
-    Viewer: "Viewer",
+    Viewer: " ",
     Admin: "Admin",
     Editor: "Editor",
 };

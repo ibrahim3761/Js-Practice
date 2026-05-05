@@ -12,17 +12,61 @@ class Stuent extends Person {
   }
 }
 class NextLevelDeveloper extends Person {
-  getSleep(){
+  getSleep() {
     console.log(`I am a next level developer and I sleep for 6 hours`);
   }
 }
 
-const getSleepingHours = (param : Person)=>{
-    param.getSleep();
+const getSleepingHours = (param: Person) => {
+  param.getSleep();
+};
+
+const person1 = new Person();
+const person2 = new Stuent();
+const person3 = new NextLevelDeveloper();
+
+getSleepingHours(person1);
+
+class Shape {
+  getArea() {
+    return 0;
+  }
 }
 
-const person1 = new Person()
-const person2 = new Stuent()
-const person3 = new NextLevelDeveloper()
+class Circle extends Shape {
+  r: number;
 
-getSleepingHours(person1)
+  constructor(r: number) {
+    super();
+    this.r = r;
+  }
+
+  getArea(): number {
+    return Math.PI * this.r * this.r;
+  }
+}
+
+class Rectangle extends Shape {
+  h: number;
+  w: number;
+
+  constructor(h: number, w: number) {
+    super();
+    this.h = h;
+    this.w = w;
+  }
+  getArea(): number {
+    return this.h * this.w;
+  }
+}
+
+
+const getArea = (param:Shape)=>{
+    console.log(param.getArea());
+}
+
+const shape1 = new Circle(5)
+const shape2 = new Rectangle(5,4)
+
+getArea(shape1)
+getArea(shape2)

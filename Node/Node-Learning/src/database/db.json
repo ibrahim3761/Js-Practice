@@ -1,17 +1,20 @@
 [
-    {
-        "id": 1,
-        "name": "Product - 1",
-        "price" : 200
-    },
-    {
-        "id": 2,
-        "name": "Product - 2",
-        "price" : 201
-    },
-    {
-        "id": 3,
-        "name": "Product - 3",
-        "price" : 202
-    }
+  {
+    "id": 1,
+    "name": "Apple AirPods Pro",
+    "price": 249,
+    "description": "Wireless noise-cancelling earbuds with spatial audio and MagSafe charging case."
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy Watch 6",
+    "price": 299,
+    "description": "Smartwatch with fitness tracking, heart rate monitoring, and AMOLED display."
+  },
+  {
+    "id": 3,
+    "name": "Sony WH-1000XM5",
+    "price": 399,
+    "description": "Premium over-ear headphones with industry-leading noise cancellation and long battery life."
+  }
 ]

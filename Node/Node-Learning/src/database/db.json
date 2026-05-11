@@ -1,20 +1,26 @@
 [
-  {
-    "id": 1,
-    "name": "Apple AirPods Pro",
-    "price": 249,
-    "description": "Wireless noise-cancelling earbuds with spatial audio and MagSafe charging case."
-  },
-  {
-    "id": 2,
-    "name": "Samsung Galaxy Watch 6",
-    "price": 299,
-    "description": "Smartwatch with fitness tracking, heart rate monitoring, and AMOLED display."
-  },
-  {
-    "id": 3,
-    "name": "Sony WH-1000XM5",
-    "price": 399,
-    "description": "Premium over-ear headphones with industry-leading noise cancellation and long battery life."
-  }
+    {
+        "id": 1,
+        "name": "Apple AirPods Pro",
+        "price": 249,
+        "description": "Wireless noise-cancelling earbuds with spatial audio and MagSafe charging case."
+    },
+    {
+        "id": 2,
+        "name": "Samsung Galaxy Watch 6",
+        "price": 299,
+        "description": "Smartwatch with fitness tracking, heart rate monitoring, and AMOLED display."
+    },
+    {
+        "id": 3,
+        "name": "Sony WH-1000XM5",
+        "price": 399,
+        "description": "Premium over-ear headphones with industry-leading noise cancellation and long battery life."
+    },
+    {
+        "id": 1778526024807,
+        "name": "Logitech MX Master 3S",
+        "price": 119,
+        "description": "Advanced wireless mouse designed for productivity with ultra-fast scrolling and silent clicks."
+    }
 ]

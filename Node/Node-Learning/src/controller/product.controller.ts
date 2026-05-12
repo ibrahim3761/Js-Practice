@@ -37,7 +37,7 @@ export const productController = async (
 
     const products = readProduct();
 
-    res.writeHead(200, { "content-type": "application/json" });
+    res.writeHead(404, { "content-type": "application/json" });
     res.end(
       JSON.stringify({
         message: "Products found successfully ",
@@ -47,8 +47,13 @@ export const productController = async (
   }
   // GET single product
   else if (method === "GET" && id !== null) {
+    
     const products = readProduct();
     const product = products.find((p: IProduct) => p.id === id);
+    if(!product){
+      res.writeHead(404, { "content-type": "application/json" });
+      res.end(JSON.stringify({ message: "Product not found", data: null }));F
+    }
     //console.log(product);
     res.writeHead(200, { "content-type": "application/json" });
     res.end(
@@ -88,13 +93,33 @@ export const productController = async (
     }
     products[index] = { id: products[index].id, ...body };
 
-    writeProduct(products)
+    writeProduct(products);
 
     res.writeHead(200, { "content-type": "application/json" });
     res.end(
       JSON.stringify({
         message: "Product updated successfully ",
         data: products[index],
+      }),
+    );
+  }
+  //DELETE
+  else if (method === "DELETE" && id !== null) {
+    const products = readProduct();
+    const index = products.findIndex((p: IProduct) => p.id === id);
+    if (index < 0) {
+      res.writeHead(404, { "content-type": "application/json" });
+      res.end(JSON.stringify({ message: "Product not found", data: null }));
+    }
+    products.splice(index,1);
+
+    writeProduct(products);
+
+    res.writeHead(200, { "content-type": "application/json" });
+    res.end(
+      JSON.stringify({
+        message: "Product deleted successfully ",
+        data: products,
       }),
     );
   }

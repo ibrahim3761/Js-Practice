@@ -60,7 +60,7 @@ app.get("/api/users", async (req: Request, res: Response) => {
       data: result.rows,
     });
   } catch (error: any) {
-    res.status(400).json({
+    res.status(500).json({
       success: false,
       message: error.message,
       data: error.detail,
@@ -93,7 +93,7 @@ app.get("/api/users/:id", async (req: Request, res: Response) => {
       data: result.rows[0],
     });
   } catch (error: any) {
-    res.status(400).json({
+    res.status(500).json({
       success: false,
       message: error.message,
       error: error.detail,
@@ -109,7 +109,8 @@ app.post("/api/users", async (req: Request, res: Response) => {
   try {
     const result = await pool.query(
       `INSERT INTO users(name,email,password,age)
-       VALUES($1,$2,$3,$4)RETURNING *
+       VALUES($1,$2,$3,$4)
+       RETURNING *
       `,
       [name, email, password, age],
     );
@@ -121,12 +122,46 @@ app.post("/api/users", async (req: Request, res: Response) => {
       data: result.rows[0],
     });
   } catch (error: any) {
-    res.status(400).json({
+    res.status(500).json({
       message: error.message,
       error: error.detail,
     });
   }
 });
+
+// User Update PUT API
+app.put('/api/users/:id', async (req: Request, res: Response) => {
+  const {id} = req.params;
+  const {name,password,age,is_active} = req.body;
+  try{
+    const result = await pool.query(`
+    UPDATE users SET name = COALESCE($1,name), password = COALESCE($2,password), age = COALESCE($3,age), is_active = COALESCE($4,is_active) 
+    WHERE id = $5 
+    RETURNING *
+    `,[name,password,age,is_active,id])
+    console.log(result);
+    if(result.rows.length === 0){
+      return res.status(404).json({
+        success: false,
+        message: "User Not Found",
+        data: null,
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "User Updated Successfully",
+      data: result.rows[0],
+    });
+  }
+  catch(error:any){
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+      data: error.detail,
+    });
+  }
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

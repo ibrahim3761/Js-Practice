@@ -39,6 +39,7 @@ const initDB = async () => {
 };
 initDB();
 
+//normal GET
 app.get("/", (req: Request, res: Response) => {
   //res.send('Hello World!!');
   res.status(200).json({
@@ -47,7 +48,61 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.post("/", async (req: Request, res: Response) => {
+// User GET API
+app.get("/api/users", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`
+      SELECT * FROM users
+   `);
+    res.status(200).json({
+      success: true,
+      message: "Users Retrrieved Successfully",
+      data: result.rows,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+      data: error.detail,
+    });
+  }
+});
+
+// User GET API by ID
+app.get("/api/users/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      `
+      SELECT * FROM users WHERE id = $1
+    `,
+      [id],
+    );
+
+    if(result.rows.length === 0){
+      return res.status(404).json({
+        success: false,
+        message: "User Not Found",
+        data: null,
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User Retrieved Successfully",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+      error: error.detail,
+    });
+  }
+});
+
+// User Create POST API
+app.post("/api/users", async (req: Request, res: Response) => {
   // console.log(req.body);
   const { name, email, password, age } = req.body;
 

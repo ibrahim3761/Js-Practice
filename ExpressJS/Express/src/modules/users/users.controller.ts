@@ -1,5 +1,4 @@
 import type { Request, Response } from "express";
-import { pool } from "../../db";
 import { usersService } from "./users.service";
 
 // USER GET req&res handler
@@ -24,7 +23,7 @@ const getUsers =async (req: Request, res: Response) => {
 const getUserById = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const result = await usersService.getUserByIdfromDB(id)
+    const result = await usersService.getUserByIdfromDB(id as string);
 
     if(result.rows.length === 0){
       return res.status(404).json({
@@ -77,7 +76,7 @@ const updateUser =  async (req: Request, res: Response) => {
   //const {name,password,age,is_active} = req.body;
   try{
     
-    const result = await usersService.updateUserInDB(id, req.body) 
+    const result = await usersService.updateUserInDB(id as string , req.body) 
 
     console.log(result);
     if(result.rows.length === 0){
@@ -107,7 +106,7 @@ const deleteUser = async (req: Request, res: Response) => {
   const {id} = req.params;
   try{
     
-    const result = await usersService.deleteUserFromDB(id)
+    const result = await usersService.deleteUserFromDB(id as string)
     
     if(result.rowCount === 0){
       return res.status(404).json({

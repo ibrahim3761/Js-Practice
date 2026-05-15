@@ -15,7 +15,6 @@ router.post("/", usersController.createUser);
 // User Update PUT API
 router.put('/:id', usersController.updateUser);
 
-
 //User DELETE API
 router.delete('/:id', usersController.deleteUser)
 

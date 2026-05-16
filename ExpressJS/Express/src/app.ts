@@ -3,8 +3,8 @@ import express, {
   type Request,
   type Response,
 } from "express";
-import { pool } from "./db";
 import { userRouter } from "./modules/users/users.route";
+import { profileRoute } from "./modules/profiles/profile.route";
 
 const app: Application = express();
 
@@ -25,6 +25,8 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.use('/api/users', userRouter)
+
+app.use('/api/profiles', profileRoute)
 
 
 export default app;

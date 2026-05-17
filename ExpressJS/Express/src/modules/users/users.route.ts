@@ -1,10 +1,13 @@
 import { Router } from "express";
 import { usersController } from "./users.controller";
+import auth from "../../middleware/auth";
 
 const router = Router()
 
+
+
 // User GET API
-router.get("/", usersController.getUsers);
+router.get("/", auth(), usersController.getUsers);
 
 // User GET API by ID
 router.get("/:id",usersController.getUserById);

@@ -3,3 +3,15 @@ Method -> GET - Time -> 1779030037833 - Url-> /
 Method -> GET - Time -> 1779030050345 - Url-> /users
 Method -> GET - Time -> 1779030067513 - Url-> /api/users
 Method -> GET - Time -> 1779030305393 - Url-> /api/users/1
+Method -> GET - Time -> 1779030555989 - Url-> /api/users
+Method -> GET - Time -> 1779030762107 - Url-> /api/users
+Method -> GET - Time -> 1779030820402 - Url-> /api/users
+Method -> GET - Time -> 1779030875991 - Url-> /api/users
+Method -> POST - Time -> 1779031057923 - Url-> /api/auth/login
+Method -> GET - Time -> 1779031123743 - Url-> /api/users/
+Method -> GET - Time -> 1779031166049 - Url-> /api/users/
+Method -> GET - Time -> 1779031296600 - Url-> /api/users
+Method -> GET - Time -> 1779031319277 - Url-> /api/users/
+Method -> GET - Time -> 1779031322242 - Url-> /api/users/
+Method -> GET - Time -> 1779031343767 - Url-> /api/users/
+Method -> GET - Time -> 1779031345870 - Url-> /api/users/

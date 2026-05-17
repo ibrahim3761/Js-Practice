@@ -4,6 +4,7 @@ import { usersService } from "./users.service";
 // USER GET req&res handler
 const getUsers =async (req: Request, res: Response) => {
   try {
+    console.log(req.user)
     const result = await usersService.getUsersfromDB();
     res.status(200).json({
       success: true,
